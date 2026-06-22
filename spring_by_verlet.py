@@ -11,7 +11,7 @@ v = 1
 
 # simulation time, timestep and time
 t_max = 100
-dt = 10
+dt = 1 #unstable for dt>2, transition occours or 1.8<dt<2
 t_array = np.arange(0, t_max, dt)
 
 # initialise empty lists to record trajectories
