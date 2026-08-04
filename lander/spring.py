@@ -34,7 +34,6 @@ for t in t_array:
 x_array = np.array(x_list)
 v_array = np.array(v_list)
 
-
 # plot the position-time graph
 plt.figure(1)
 plt.clf()
