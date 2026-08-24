@@ -2,12 +2,13 @@
 # %matplotlib inline
 import numpy as np
 import matplotlib.pyplot as plt
-
+G = 6.67430e-11
 # mass, spring constant, initial position and velocity
 m = 1
+M = 6.42e23
 k = 1
-r = np.array([0, 0, 0])
-v = np.array([1, 0, 0])
+r = np.array([42164000, 0, 0])
+v = np.array([0, 3074.6, 0])
 
 # simulation time, timestep and time
 t_max = 100
@@ -28,8 +29,10 @@ for t in t_array:
     r_list.append(r)
     v_list.append(v)
 
-    # calculate new position and velocity
-    a = -k * r / m
+    if np.linalg.norm(r) == 0:
+        a = np.array([0, 0, 0])
+    else:
+        a = -G * M * r / np.linalg.norm(r)**3
     r_new = 2 * r - r_prev + dt**2 * a
     v = (r_new - r) / dt
     r_prev = r
