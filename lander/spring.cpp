@@ -35,9 +35,10 @@ int main() {
 
   }
 
-  // Write the trajectories to file
-  ofstream fout;
-  fout.open("trajectories.txt");
+  // Write the trajectories to the file that the Python viewer reads.
+  // ios::trunc means each run completely replaces the previous run.
+  const string output_path = "C:/Users/benok/OneDrive - University of Cambridge/1B coursework/mars lander/lander/trajectories.txt";
+  ofstream fout(output_path, ios::out | ios::trunc);
   if (fout) { // file opened successfully
     for (int i = 0; i < t_list.size(); i = i + 1) {
       fout << t_list[i] << ' ' << x_list[i] << ' ' << v_list[i] << endl;

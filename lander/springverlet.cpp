@@ -22,7 +22,7 @@ int main() {
     dt = 0.1;
     x_prev = x - dt * v;
 
-    // Euler integration
+    // Verlet integration
     for (t = 0; t <= t_max; t = t + dt) {
 
         // append current state to trajectories
@@ -30,17 +30,20 @@ int main() {
         x_list.push_back(x);
         v_list.push_back(v);
 
-        // calculate new position and velocity
+        // calculate new position and velocity using the previous state
+        double x_old = x;
         a = -k * x / m;
-		x = 2 * x - x_prev + dt * dt * a; // Verlet integration
-		v = (x - x_prev) / dt; // update velocity
-        x_prev = x; // update previous position
+        double x_new = 2 * x - x_prev + dt * dt * a;
+        v = (x_new - x_old) / dt; // update velocity from old/current state
+        x_prev = x_old;
+        x = x_new; // update current position
 
     }
 
-    // Write the trajectories to file
-    ofstream fout;
-    fout.open("trajectories.txt");
+    // Write the trajectories to the same file that the Python plot script reads.
+    // ios::trunc ensures that each new run replaces the previous run's data.
+    const string output_path = "C:/Users/benok/OneDrive - University of Cambridge/1B coursework/mars lander/lander/trajectories.txt";
+    ofstream fout(output_path, ios::out | ios::trunc);
     if (fout) { // file opened successfully
         for (int i = 0; i < t_list.size(); i = i + 1) {
             fout << t_list[i] << ' ' << x_list[i] << ' ' << v_list[i] << endl;
