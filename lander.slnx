@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="lander/lander.vcxproj" Id="945a91df-5e1b-4908-b89c-416ddb7776fd" />
+</Solution>
